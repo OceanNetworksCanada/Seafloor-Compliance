@@ -3,7 +3,7 @@ getToken.py, getBPRScalarData.py, and getSeismicData.py are scripts that are cal
 
 In getToken.py, a user-specific Token is retrieved from Oceans 2.0 via login credentials and written to disk the first time it is called for subsequent API queries.
 
-In getBPRScalarData.py, ONC API web services are used to download seafloor pressure, uncompensated seafloor pressure, and temperature data for a BPR instrument. When this script is called, the user is asked to enter the station code for the instrument (Location Code in Oceans 2.0) and the starttime of the data query. By defualt, the program returns three hours of data and only the uncompensated seafloor pressure as an ObsPy Stream object, "st_bpr". 
+In getBPRScalarData.py, ONC API web services are used to download seafloor pressure, uncompensated seafloor pressure, and temperature data for a BPR instrument. When this script is called, the user is asked to enter the station code for the instrument (Location Code in Oceans 2.0) and the starttime of the data query. By default, the program returns three hours of data and only the uncompensated seafloor pressure as an ObsPy Stream object, "st_bpr". 
 
 - **Time Corrections**
   
@@ -11,7 +11,7 @@ In getBPRScalarData.py, ONC API web services are used to download seafloor press
 
 - **Data Gaps**
 
-  - Preceding 2018-05-19, the driver at ONC was querying the BPR instrument for its memory size and has not been interpreting the command properly, resulting in a typical loss of 11 samples starting at midnight. As a (catch-all) fix, the code by default implements a linear interpolation, which is intended to interpolate over any encountered data gap. The code will print to terminal the data gaps it has encountered for subseuqent inspection. So far, the memory query data gaps are the only kind we've encountered. As a precaution, the code automatically extends the data query to 1 minute before the requested start time and 1 minute after the 3 hours following the requested start time. 
+  - Preceding 2018-05-19, the driver at ONC was querying the BPR instrument for its memory size and had not been interpreting the command properly, resulting in a typical loss of 11 samples starting at midnight. As a (catch-all) fix, the code by default implements a linear interpolation, which is intended to interpolate over any encountered data gap. The code will print to terminal the data gaps it has encountered for subseuqent inspection. So far, the memory query data gaps are the only kind we've encountered. As a precaution, the code automatically extends the data query to 1 minute before the requested start time and 1 minute after the 3 hours following the requested start time. 
   
 In getSeismicData.py, the IRIS Client is used to request low-rate (8 Hz) broadband seismometer data using the timeseries web service. Upon its first call, the most current StationXML file is downloaded from the ONC repository and written to disk for subsequent use. This file is read in as an ObsPy Inventory object and contains all the metadata for the station in question (including current instrument response information). An ObsPy Stream object (st_obs) is returned with seismic data for the instrument specified, decimated to bring the sampling rate to 1 sps. The decimation operation, by default, includes an anti-aliasing filter, but other than this, no processing has been applied to the data. The attached Inventory (SD.inv) can be used to correct for instrument response and get to geophysical units. 
 
