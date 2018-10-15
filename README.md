@@ -1,5 +1,5 @@
 # Seafloor Compliance
-getToken.py, getBPRScalarData, getSeismicData are scripts that are called from master.py to return (near) concurrent 1 sps BPR and OBS data. 
+getToken.py, getBPRScalarData.py, and getSeismicData.py are scripts that are called from master.py to return (near) concurrent 1 sps BPR and OBS data. 
 
 In getToken.py, a user-specific Token is retrieved from Oceans 2.0 via login credentials and written to disk the first time it is called for subsequent API queries.
 
