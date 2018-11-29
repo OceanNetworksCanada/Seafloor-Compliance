@@ -21,7 +21,7 @@ class SeismicData():
         Returns a Stream object with near concurrent low-rate (8 Hz) seismic 
         data to that of st_bpr. 
         
-             - self.inv contains the instrument response information for 
+             - self.inv contains the instrument response information for the OBS
         """
         self.invURL = 'https://github.com/OceanNetworksCanada/ONC_StationXML/raw/master/NV_StationXML.xml'
         self.invpath = user_data_dir("ONC-Inventory", "ONC")
